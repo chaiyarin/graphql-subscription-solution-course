@@ -1,41 +1,29 @@
+using Microsoft.EntityFrameworkCore;
+using GraphQLBooksAPI.Data;
+using GraphQLBooksAPI.GraphQL.Queries;
+using HotChocolate.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// Add In-Memory Database
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseInMemoryDatabase("GraphQLBooksDB"));
+
+// Add GraphQL Services
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<BookQuery>(); // ✅ เปลี่ยนเป็น Query หลัก
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Auto Migrate Database
+using (var scope = app.Services.CreateScope())
 {
-    app.MapOpenApi();
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.EnsureCreated();
 }
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+// Enable GraphQL Endpoint
+app.MapGraphQL();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

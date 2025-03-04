@@ -1,0 +1,21 @@
+Query All
+---
+query {
+  books {
+    getBooks {
+      bookId
+      bookName
+      price
+      rating
+      author {
+        nickname
+      }
+    }
+  }
+}
+---
+query {
+  bookById(bookId: 1) {
+    bookName
+  }
+}
