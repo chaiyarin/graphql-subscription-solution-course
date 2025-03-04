@@ -2,5 +2,5 @@ namespace GraphQLBooksAPI.GraphQL.Mutations;
 
 public class Mutation
 {
-    public AuthorMutation Authors => new(); // ✅ เพิ่ม AuthorMutation
+    public AuthorMutation AuthorMutation => new(); // ✅ เพิ่ม AuthorMutation
 }

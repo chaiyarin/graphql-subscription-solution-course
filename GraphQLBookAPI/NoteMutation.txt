@@ -12,3 +12,13 @@ mutation {
     }
   }
 }
+
+---
+
+mutation {
+  authorMutation {
+    updateAuthor(authorId: 1, nickname: "aof") {
+      nickname
+    }
+  }
+}

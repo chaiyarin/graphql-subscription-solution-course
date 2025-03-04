@@ -1,5 +1,6 @@
 using GraphQLBooksAPI.Data;
 using GraphQLBooksAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraphQLBooksAPI.GraphQL.Mutations;
 
@@ -9,7 +10,7 @@ public class AuthorMutation
         string nickname,
         string firstname,
         string lastname,
-        DateTime birthdayDate,
+        string birthdayDate,
         string coverProfileImageUrl,
         [Service] AppDbContext context)
     {
@@ -25,6 +26,34 @@ public class AuthorMutation
         };
 
         context.Authors.Add(author);
+        await context.SaveChangesAsync();
+        return author;
+    }
+
+    public async Task<Author?> UpdateAuthorAsync(
+    int authorId,
+    string? nickname,
+    string? firstname,
+    string? lastname,
+    string? birthdayDate,
+    string? coverProfileImageUrl,
+    [Service] AppDbContext context)
+    {
+        var author = await context.Authors.FirstOrDefaultAsync(a => a.AuthorId == authorId);
+        if (author == null)
+        {
+            throw new Exception($"Author with ID {authorId} not found.");
+        }
+
+        // อัปเดตเฉพาะค่าที่ส่งมา (ค่าที่ไม่ส่งมา จะไม่เปลี่ยนแปลง)
+        if (!string.IsNullOrEmpty(nickname)) author.Nickname = nickname;
+        if (!string.IsNullOrEmpty(firstname)) author.Firstname = firstname;
+        if (!string.IsNullOrEmpty(lastname)) author.Lastname = lastname;
+        if (!string.IsNullOrEmpty(birthdayDate)) author.BirthdayDate = birthdayDate;
+        if (!string.IsNullOrEmpty(coverProfileImageUrl)) author.CoverProfileImageUrl = coverProfileImageUrl;
+
+        author.UpdatedDate = DateTime.UtcNow; // ✅ เพิ่ม timestamp อัปเดต
+
         await context.SaveChangesAsync();
         return author;
     }
