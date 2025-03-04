@@ -1,0 +1,101 @@
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+GraphQLBookAPI/project.lock.json
+GraphQLBookAPI/project.fragment.lock.json
+GraphQLBookAPI/artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+GraphQLBookAPI/ScaffoldingReadMe.txt
+
+# Configuration files
+appsettings.json
+appsettings.*.json
+GraphQLBookAPI/appsettings.json
+GraphQLBookAPI/appsettings.*.json
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+GraphQLBookAPI/*.rsuser
+GraphQLBookAPI/*.suo
+GraphQLBookAPI/*.user
+GraphQLBookAPI/*.userosscache
+GraphQLBookAPI/*.sln.docstates
+
+# Auto-generated files
+Generated_Code/
+GraphQLBookAPI/Generated_Code/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+GraphQLBookAPI/[Dd]ebug/
+GraphQLBookAPI/[Rr]elease/
+GraphQLBookAPI/x64/
+GraphQLBookAPI/x86/
+GraphQLBookAPI/[Aa][Rr][Mm]/
+GraphQLBookAPI/[Aa][Rr][Mm]64/
+GraphQLBookAPI/bld/
+GraphQLBookAPI/[Bb]in/
+GraphQLBookAPI/[Oo]bj/
+GraphQLBookAPI/[Ll]og/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.json
+project.fragment.json
+project.lock.json
+project.fragment.lock.json
+artifacts/
+GraphQLBookAPI/*.nupkg
+GraphQLBookAPI/*.snupkg
+GraphQLBookAPI/.nuget/
+GraphQLBookAPI/packages/
+GraphQLBookAPI/project.json
+GraphQLBookAPI/project.fragment.json
+GraphQLBookAPI/project.lock.json
+GraphQLBookAPI/project.fragment.lock.json
+GraphQLBookAPI/artifacts/
+
+# Visual Studio Code
+.vscode/
+GraphQLBookAPI/.vscode/
+
+# Rider
+.idea/
+GraphQLBookAPI/.idea/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+GraphQLBookAPI/Thumbs.db
+GraphQLBookAPI/ehthumbs.db
+
+# Folder config file
+Desktop.ini
+GraphQLBookAPI/Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+GraphQLBookAPI/$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
+GraphQLBookAPI/*.lnk
