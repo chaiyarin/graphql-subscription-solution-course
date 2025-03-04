@@ -19,3 +19,22 @@ query {
     bookName
   }
 }
+---
+query {
+  authorsQuery {
+    authors {
+      firstname
+      lastname
+      books {
+        bookName
+      }
+    },
+    authorById(authorId: 1) {
+      authorId
+      nickname
+      books {
+        bookName
+      }
+    }
+  }
+}

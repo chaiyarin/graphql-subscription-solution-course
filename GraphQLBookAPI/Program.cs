@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add GraphQL Services
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<BookQuery>(); // ✅ เปลี่ยนเป็น Query หลัก
+    .AddQueryType<Query>();
 
 var app = builder.Build();
 
