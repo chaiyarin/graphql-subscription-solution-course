@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using GraphQLBooksAPI.Data;
 using GraphQLBooksAPI.GraphQL.Queries;
 using HotChocolate.AspNetCore;
+using GraphQLBooksAPI.GraphQL.Mutations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add GraphQL Services
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 
 var app = builder.Build();
 
