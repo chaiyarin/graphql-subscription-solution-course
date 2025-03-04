@@ -1,5 +1,6 @@
 using GraphQLBooksAPI.Data;
 using GraphQLBooksAPI.Models;
+using HotChocolate.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GraphQLBooksAPI.GraphQL.Mutations;
@@ -12,7 +13,8 @@ public class AuthorMutation
         string lastname,
         string birthdayDate,
         string coverProfileImageUrl,
-        [Service] AppDbContext context)
+        [Service] AppDbContext context,
+        [Service] ITopicEventSender eventSender)
     {
         var author = new Author
         {
@@ -27,6 +29,7 @@ public class AuthorMutation
 
         context.Authors.Add(author);
         await context.SaveChangesAsync();
+        await eventSender.SendAsync("AuthorCreated", author);
         return author;
     }
 

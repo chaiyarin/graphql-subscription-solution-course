@@ -3,6 +3,7 @@ using GraphQLBooksAPI.Data;
 using GraphQLBooksAPI.GraphQL.Queries;
 using HotChocolate.AspNetCore;
 using GraphQLBooksAPI.GraphQL.Mutations;
+using GraphQLBooksAPI.GraphQL.Subscriptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddSubscriptionType<AuthorSubscription>()
+    .AddInMemorySubscriptions();
 
 var app = builder.Build();
 
