@@ -16,7 +16,7 @@ builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
-    .AddSubscriptionType<ChatSubscription>()
+    .AddSubscriptionType<Subscription>()
     .AddInMemorySubscriptions();
 
 var app = builder.Build();

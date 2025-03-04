@@ -3,3 +3,12 @@ subscription {
     nickname
   }
 }
+
+----
+
+subscription {
+  subscribeToMessages(receiverUsername: "bbb") {
+    senderUsername,
+    message
+  }
+}
