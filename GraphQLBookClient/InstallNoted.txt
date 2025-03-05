@@ -1,0 +1,23 @@
+npm install @vue/apollo-composable @apollo/client graphql
+---
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client/core';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const apolloClient = new ApolloClient({
+    link: new HttpLink({ uri: 'http://localhost:5283/graphql' }), // เปลี่ยนเป็น URL ของ API จริง
+    cache: new InMemoryCache(),
+  });
+
+  nuxtApp.vueApp.provide('apollo', apolloClient);
+});
+---
+npm install bootstrap 
+---
+nuxt.config.ts
+export default defineNuxtConfig({
+  css: ['bootstrap/dist/css/bootstrap.min.css']
+});
+
+---
+
+http://localhost:5283/graphql

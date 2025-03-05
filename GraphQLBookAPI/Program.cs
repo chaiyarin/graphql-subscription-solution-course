@@ -19,8 +19,16 @@ builder.Services
     .AddSubscriptionType<Subscription>()
     .AddInMemorySubscriptions();
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+});
 
+var app = builder.Build();
+app.UseCors("AllowAll"); // << ใช้ Policy ที่เราสร้างไว้
 // Auto Migrate Database
 using (var scope = app.Services.CreateScope())
 {
