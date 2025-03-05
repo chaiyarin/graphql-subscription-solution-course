@@ -1,10 +1,10 @@
 mutation {
-  authors {
+  authorMutation {
     createAuthor(
-      nickname: "Aof",
-      firstname: "Chaiyarin",
-      lastname: "Niamsuwan",
-      birthdayDate: "1892-01-03T00:00:00Z",
+      nickname: "Aof"
+      firstname: "Chaiyarin"
+      lastname: "Niamsuwan"
+      birthdayDate: "1892-01-03T00:00:00Z"
       coverProfileImageUrl: "https://google.com"
     ) {
       authorId
@@ -12,6 +12,7 @@ mutation {
     }
   }
 }
+
 
 ---
 
