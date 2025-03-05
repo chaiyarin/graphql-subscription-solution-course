@@ -14,7 +14,9 @@
                             <p class="text-primary">Price: ${{ book.price }}</p>
                         </div>
                         <div class="card-footer text-center">
-                            <button class="btn btn-primary">View Details</button>
+                            <nuxt-link :to="`/book/${book.bookId}`" class="btn btn-primary">
+                                View Details
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>

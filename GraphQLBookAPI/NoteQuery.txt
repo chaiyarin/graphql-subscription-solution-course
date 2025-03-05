@@ -38,3 +38,25 @@ query {
     }
   }
 }
+---
+การใช้ตัวแปร
+query GetBookDetail($bookId: Int!) {
+  booksQuery {
+    bookById(bookId: $bookId) {
+      bookId
+      bookName
+      description
+      price
+      rating
+      createdDate
+      coverBookImageUrl
+      author {
+        nickname
+        firstname
+        lastname
+        birthdayDate
+        coverProfileImageUrl
+      }
+    }
+  }
+}
