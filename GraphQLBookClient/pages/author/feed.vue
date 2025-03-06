@@ -1,6 +1,7 @@
 <script setup>
 import { useSubscription } from '@vue/apollo-composable';
 import { gql } from '@apollo/client/core';
+import { ref, watch, onMounted } from 'vue';
 
 const ON_AUTHOR_CREATED = gql`
   subscription OnAuthorCreated {
@@ -15,17 +16,45 @@ const ON_AUTHOR_CREATED = gql`
 const { result } = useSubscription(ON_AUTHOR_CREATED);
 const authors = ref([]);
 
+// ฟังก์ชันสำหรับขออนุญาตใช้ Notification API
+const requestNotificationPermission = () => {
+    if ("Notification" in window) {
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission().then(permission => {
+                console.log("Notification permission:", permission);
+            });
+        }
+    }
+};
+
+// ฟังก์ชันสำหรับแสดงการแจ้งเตือน
+const showNotification = (author) => {
+    if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("📢 New Author Created", {
+            body: `${author.firstname} ${author.lastname} has joined!`,
+            icon: author.coverProfileImageUrl || "https://via.placeholder.com/100"
+        });
+    }
+};
+
 // ตรวจสอบค่า result
 watch(result, () => {
     console.log(result);
     if (result.value) {
-        authors.value.push({
+        const newAuthor = {
             firstname: result.value.onAuthorCreated.firstname,
             lastname: result.value.onAuthorCreated.lastname,
             coverProfileImageUrl: result.value.onAuthorCreated.coverProfileImageUrl
-        });
+        };
+        authors.value.push(newAuthor);
+        showNotification(newAuthor);
     }
     console.log("📌 อัปเดตรายชื่อ:", authors.value);
+});
+
+// ขออนุญาต Notification เมื่อ Component ถูกโหลด
+onMounted(() => {
+    requestNotificationPermission();
 });
 </script>
 
