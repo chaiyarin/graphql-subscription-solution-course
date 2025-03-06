@@ -1,0 +1,4 @@
+curl -X POST http://localhost:5283/graphql \
+     -H "Content-Type: application/json" \
+     -H "Accept: text/event-stream" \
+     -d '{"query":"subscription { onAuthorCreated { firstname lastname } }"}'
