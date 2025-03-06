@@ -44,10 +44,10 @@ const apolloClient = new ApolloClient({
 // ✅ ให้ Vue ใช้ Apollo Client
 provideApolloClient(apolloClient);
 
-// ✅ ดึงข้อมูลหนังสือ
+// ✅ ดึงข้อมูลผู้เขียน
 const { result, loading, error, refetch } = useQuery(GET_AUTHOR_DETAIL);
 
-// ✅ Model ใหม่ สำหรับเก็บข้อมูลหนังสือ
+// ✅ Model ใหม่ สำหรับเก็บข้อมูลผู้เขียน
 const authorModel = ref({
   authorId: null,
   nickname: "",
