@@ -29,6 +29,9 @@ public class Subscription
     [Subscribe]
     [Topic("AuthorUpdated")]
     public Author OnAuthorUpdated([EventMessage] Author author) => author;
+    [Subscribe]
+    [Topic("BookCreated")]
+    public Book OnBookCreated([EventMessage] Book book) => book;
 
     [Subscribe]
     [Topic("AuthorDeleted")]
