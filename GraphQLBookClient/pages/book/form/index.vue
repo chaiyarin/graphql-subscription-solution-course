@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <h1 class="text-center mb-4">Add/Edit Book</h1>
+    <h1 class="text-center mb-4">Create Book</h1>
 
     <!-- Form to Add/Edit Book -->
     <form @submit.prevent="submitForm">
