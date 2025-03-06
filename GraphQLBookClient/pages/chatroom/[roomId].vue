@@ -33,15 +33,12 @@ const SEND_MESSAGE = gql`
 
 // เก็บข้อความทั้งหมดในห้อง
 const messages = ref([]);
+const senderUsername = ref("No Name");
 
 // ใช้ Subscription เพื่อติดตามข้อความที่ถูกส่งมาที่ห้องนี้
-const { result } = useSubscription(SUBSCRIBE_TO_MESSAGES, {
-    variables: { receiverUsername: "chaiyarin_room" }
-});
-
-const variable = {
-    receiverUsername: roomId.value
-};
+const { result } = useSubscription(SUBSCRIBE_TO_MESSAGES,
+    { receiverUsername: roomId.value }
+);
 
 // อัปเดตรายการข้อความแบบ Real-time
 watch(result, () => {
@@ -65,7 +62,7 @@ const sendMessage = async () => {
         message: {
             message: newMessage.value,
             receiverUsername: roomId.value,
-            senderUsername: "aof" // เปลี่ยนเป็นผู้ใช้ที่ login จริง ๆ ในแอปของคุณ
+            senderUsername: senderUsername.value // เปลี่ยนเป็นผู้ใช้ที่ login จริง ๆ ในแอปของคุณ
         }
     }
     console.log(variables);
@@ -92,6 +89,7 @@ const sendMessage = async () => {
         </div>
 
         <div class="chat-input">
+            <input v-model="senderUsername" placeholder="Your Name" />
             <input v-model="newMessage" placeholder="Type a message..." @keyup.enter="sendMessage" />
             <button @click="sendMessage">Send</button>
         </div>
