@@ -40,5 +40,4 @@ using (var scope = app.Services.CreateScope())
 
 // Enable GraphQL Endpoint
 app.MapGraphQL();
-
 app.Run();
