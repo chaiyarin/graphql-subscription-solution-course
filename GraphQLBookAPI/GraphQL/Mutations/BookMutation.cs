@@ -10,7 +10,7 @@ public class BookMutation
         string description,
         decimal price,
         int authorId,
-        int rate,
+        int rating,
         string coverImageUrl,
         [Service] AppDbContext context,
         [Service] ITopicEventSender eventSender)
@@ -21,7 +21,7 @@ public class BookMutation
             Description = description,
             Price = price,
             AuthorId = authorId,
-            Rating = rate,
+            Rating = rating,
             CoverBookImageUrl = coverImageUrl,
             IsDeleted = false
         };
@@ -37,7 +37,7 @@ public class BookMutation
         string? bookName,
         string? description,
         decimal? price,
-        int? rate,
+        int? rating,
         int? authorId,
         string? coverImageUrl,
         [Service] AppDbContext context)
@@ -52,7 +52,7 @@ public class BookMutation
         if (!string.IsNullOrEmpty(description)) book.Description = description;
         if (!string.IsNullOrEmpty(description)) book.Description = description;
         if (price !=  null) book.Price = price.Value;
-        if (rate != null) book.Rating = rate.Value;
+        if (rating != null) book.Rating = rating.Value;
         if (authorId != null) book.Rating = authorId.Value;
         if (!string.IsNullOrEmpty(coverImageUrl)) book.CoverBookImageUrl = coverImageUrl;
 
