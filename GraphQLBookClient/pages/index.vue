@@ -38,6 +38,12 @@
               >
                 View Details
               </nuxt-link>
+              <nuxt-link
+                :to="`/book/form/${book.bookId}`"
+                class="btn btn-primary mx-2"
+              >
+                Edit Book
+              </nuxt-link>
               <button
                 class="btn btn-danger"
                 @click="deleteBookByBookId(book.bookId)"
