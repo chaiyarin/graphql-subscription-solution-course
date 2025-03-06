@@ -37,6 +37,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Enable GraphQL Endpoint
+app.UseWebSockets();
 app.MapGraphQL();
 
 app.Run();
