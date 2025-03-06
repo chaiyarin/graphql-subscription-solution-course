@@ -60,4 +60,19 @@ public class AuthorMutation
         await context.SaveChangesAsync();
         return author;
     }
+
+    public async Task<Author> DeleteAuthorAsync(int authorId, [Service] AppDbContext context)
+    {
+        var author = await context.Authors.FindAsync(authorId);
+        if (author == null || author.IsDeleted)
+        {
+            throw new Exception($"Author with ID {authorId} not found or already deleted.");
+        }
+
+        author.IsDeleted = true;
+        author.UpdatedDate = DateTime.UtcNow; // Update the timestamp
+
+        await context.SaveChangesAsync();
+        return author;
+    }
 }
