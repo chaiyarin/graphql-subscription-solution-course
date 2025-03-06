@@ -4,6 +4,7 @@ using GraphQLBooksAPI.GraphQL.Queries;
 using HotChocolate.AspNetCore;
 using GraphQLBooksAPI.GraphQL.Mutations;
 using GraphQLBooksAPI.GraphQL.Subscriptions;
+using HotChocolate.Execution;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+app.UseWebSockets();
 app.UseCors("AllowAll"); // << ใช้ Policy ที่เราสร้างไว้
 // Auto Migrate Database
 using (var scope = app.Services.CreateScope())
