@@ -71,6 +71,7 @@
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-secondary mx-2" @click="router.push('/')">Cancel</button>
     </form>
   </div>
 </template>
