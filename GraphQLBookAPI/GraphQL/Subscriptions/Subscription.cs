@@ -33,4 +33,15 @@ public class Subscription
     [Subscribe]
     [Topic("AuthorDeleted")]
     public int OnAuthorDeleted([EventMessage] int authorId) => authorId;
+    [Subscribe]
+    [Topic("BookCreated")]
+    public Book OnBookCreated([EventMessage] Book book) => book;
+
+    [Subscribe]
+    [Topic("BookUpdated")]
+    public Book OnBookUpdated([EventMessage] Book book) => book;
+
+    [Subscribe]
+    [Topic("BookDeleted")]
+    public int OnBookDeleted([EventMessage] int bookId) => bookId;
 }
