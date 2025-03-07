@@ -138,9 +138,10 @@ const submitForm = async () => {
     const { mutate } = useMutation(MUTATION_CREATEAUTHOR, { variables });
     mutate().then(res => {
       console.log("Author created:", res);
-
+      router.push('/author'); 
+      setTimeout(() => location.reload(), 100); // Force a reload if needed
     })
-    router.push('/author'); 
+
   } catch (error) {
     console.error("Error creating Author:", error);
   }

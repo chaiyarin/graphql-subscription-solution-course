@@ -149,9 +149,10 @@ const submitForm = async () => {
     const { mutate } = useMutation(MUTATION_CREATEBOOK, { variables });
     mutate().then(res => {
       console.log("Book created:", res);
+      router.push('/'); 
+      setTimeout(() => location.reload(), 100); // Force a reload if needed
 
     })
-    router.push('/'); 
   } catch (error) {
     console.error("Error creating book:", error);
   }

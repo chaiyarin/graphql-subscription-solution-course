@@ -124,6 +124,8 @@ const submitForm = async () => {
     mutate().then((res) => {
       console.log("✅ Author Updated Successfully");
       router.push("/author");
+      setTimeout(() => location.reload(), 100); // Force a reload if needed
+
     });
 
   } catch (error) {
