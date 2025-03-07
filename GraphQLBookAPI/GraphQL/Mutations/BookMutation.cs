@@ -40,7 +40,8 @@ public class BookMutation
         int? rating,
         int? authorId,
         string? coverImageUrl,
-        [Service] AppDbContext context)
+        [Service] AppDbContext context,
+        [Service] ITopicEventSender eventSender)
     {
         var book = await context.Books.FindAsync(bookId);
         if (book == null || book.IsDeleted)
@@ -57,12 +58,13 @@ public class BookMutation
         if (!string.IsNullOrEmpty(coverImageUrl)) book.CoverBookImageUrl = coverImageUrl;
 
         book.UpdatedDate = DateTime.UtcNow;
+        await eventSender.SendAsync("BookUpdated", book);
 
         await context.SaveChangesAsync();
         return book;
     }
 
-    public async Task<Book> DeleteBookAsync(int bookId, [Service] AppDbContext context)
+    public async Task<Book> DeleteBookAsync(int bookId, [Service] AppDbContext context,    [Service] ITopicEventSender eventSender)
     {
         var book = await context.Books.FindAsync(bookId);
         if (book == null || book.IsDeleted)
@@ -72,6 +74,7 @@ public class BookMutation
 
         book.IsDeleted = true;
         book.UpdatedDate = DateTime.UtcNow;
+        await eventSender.SendAsync("BookDeleted",bookId);
 
         await context.SaveChangesAsync();
         return book;
