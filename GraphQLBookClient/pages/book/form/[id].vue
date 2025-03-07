@@ -136,6 +136,8 @@ const submitForm = async () => {
     mutate().then((res) => {
       console.log("✅ Book Updated Successfully");
       router.push("/");
+      setTimeout(() => location.reload(), 100); // Force a reload if needed
+
     });
 
   } catch (error) {
@@ -146,7 +148,6 @@ const submitForm = async () => {
 // ✅ ล้าง Cache และ Refetch Query ทุกครั้งที่หน้าโหลด
 onMounted(() => {
   console.log("🚀 Clearing Apollo Cache and Refetching Data...");
-  apolloClient.cache.reset();
   refetch({ bookId: bookId.value });
 });
 </script>

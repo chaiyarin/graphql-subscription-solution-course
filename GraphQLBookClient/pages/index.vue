@@ -106,10 +106,7 @@ const deleteBookByBookId = (bookId) => {
       console.error("Error deleting book:", err);
     });
 
-    onMounted(() => {
-      refetch({});
 
-    });
 };
 </script>
 

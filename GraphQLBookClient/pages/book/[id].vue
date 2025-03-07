@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useQuery, useApolloClient } from '@vue/apollo-composable';
+import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
 
 // ✅ ดึง Route Parameter
@@ -35,9 +35,7 @@ query GetBookDetail($bookId: Int!) {
 }
 `;
 
-// ✅ ใช้ Apollo Client เพื่อ Clear Cache ทุกครั้ง
-const { resolveClient } = useApolloClient();
-const apolloClient = resolveClient();
+
 
 // ✅ สร้าง Query และใช้ 'network-only' Policy เพื่อให้ Apollo ไม่ใช้ Cache
 const { result, loading, error, refetch } = useQuery(GET_BOOK_DETAIL, {
@@ -48,7 +46,6 @@ const { result, loading, error, refetch } = useQuery(GET_BOOK_DETAIL, {
 // ✅ ล้าง Cache และ Refetch Query ทุกครั้งที่หน้าโหลด
 onMounted(() => {
   console.log("🚀 Clearing Apollo Cache and Refetching Data...");
-  apolloClient.cache.reset(); // 🔥 ล้าง Cache ของ Apollo
   refetch({ bookId: bookId.value }); // ✅ ดึงข้อมูลใหม่เสมอ
 });
 </script>
