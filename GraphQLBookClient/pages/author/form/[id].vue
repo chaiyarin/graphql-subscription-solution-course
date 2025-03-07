@@ -3,11 +3,9 @@ import { ref, onMounted, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
   useQuery,
-  provideApolloClient,
   useMutation,
 } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
 
 // ✅ ดึง Route Parameter
 const route = useRoute();
@@ -35,14 +33,6 @@ query Author {
 } 
 `;
 
-// ✅ สร้าง Apollo Client
-const apolloClient = new ApolloClient({
-  link: new HttpLink({ uri: "http://localhost:5283/graphql" }), // เปลี่ยนเป็น API จริงของคุณ
-  cache: new InMemoryCache(),
-});
-
-// ✅ ให้ Vue ใช้ Apollo Client
-provideApolloClient(apolloClient);
 
 // ✅ ดึงข้อมูลผู้เขียน
 const { result, loading, error, refetch } = useQuery(GET_AUTHOR_DETAIL);
@@ -144,7 +134,6 @@ const submitForm = async () => {
 // ✅ ล้าง Cache และ Refetch Query ทุกครั้งที่หน้าโหลด
 onMounted(() => {
   console.log("🚀 Clearing Apollo Cache and Refetching Data...");
-  apolloClient.cache.reset();
   refetch({ authorId: authorId.value });
 });
 </script>

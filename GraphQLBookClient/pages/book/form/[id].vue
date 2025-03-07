@@ -3,11 +3,9 @@ import { ref, onMounted, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
   useQuery,
-  provideApolloClient,
   useMutation,
 } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
 
 // ✅ ดึง Route Parameter
 const route = useRoute();
@@ -40,15 +38,6 @@ const GET_BOOK_DETAIL = gql`
     }
   }
 `;
-
-// ✅ สร้าง Apollo Client
-const apolloClient = new ApolloClient({
-  link: new HttpLink({ uri: "http://localhost:5283/graphql" }), // เปลี่ยนเป็น API จริงของคุณ
-  cache: new InMemoryCache(),
-});
-
-// ✅ ให้ Vue ใช้ Apollo Client
-provideApolloClient(apolloClient);
 
 // ✅ ดึงข้อมูลหนังสือ
 const { result, loading, error, refetch } = useQuery(GET_BOOK_DETAIL, {
