@@ -61,20 +61,12 @@
 <script setup>
 import {
   useQuery,
-  provideApolloClient,
   useMutation,
 } from "@vue/apollo-composable";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
+
 import gql from "graphql-tag";
 
-// สร้าง Apollo Client ใหม่ใน Component (ถ้า Plugin ไม่โหลด)
-const apolloClient = new ApolloClient({
-  link: new HttpLink({ uri: "http://localhost:5283/graphql" }), // เปลี่ยนเป็น API จริงของคุณ
-  cache: new InMemoryCache(),
-});
 
-// ใช้ provideApolloClient เพื่อกำหนด Context ของ Apollo
-provideApolloClient(apolloClient);
 
 const GET_BOOKS = gql`
   query {
@@ -108,10 +100,15 @@ const deleteBookByBookId = (bookId) => {
 
   mutate()
     .then((res) => {
-      refetch();
+      refetch({});
     })
     .catch((err) => {
       console.error("Error deleting book:", err);
+    });
+
+    onMounted(() => {
+      refetch({});
+
     });
 };
 </script>

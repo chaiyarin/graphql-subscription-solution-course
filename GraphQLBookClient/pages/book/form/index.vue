@@ -79,18 +79,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { provideApolloClient, useMutation } from "@vue/apollo-composable";
+import { useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
 
-// Create Apollo Client
-const apolloClient = new ApolloClient({
-  link: new HttpLink({ uri: "http://localhost:5283/graphql" }), // Change to your API endpoint
-  cache: new InMemoryCache(),
-});
 
-// Provide Apollo Client
-provideApolloClient(apolloClient);
 
 // Reactive book data
 const book = ref({
